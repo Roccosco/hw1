@@ -108,9 +108,9 @@ function checkIndovinello(titolo, descrizione){
 
 fetchIndovinelli();
 
-const modale=document.querySelector('.modal-view');
+const modale=document.querySelector('#modalIndovinelli');
 document.querySelector('#showModal').addEventListener('click', showModal);
-document.querySelector('#closeNewIndovinello').addEventListener('click', closeModal);
+document.querySelector('.closeModale').addEventListener('click', closeModal);
 document.querySelector('#newIndovinelloButton').addEventListener('click', addIndovinello);
 document.querySelector('#soluzione').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {

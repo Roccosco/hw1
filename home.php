@@ -18,8 +18,8 @@
 
         <title>Riddler - Home</title>
 
-        <link rel="stylesheet" href="mainStyle.css"/>
-        <link rel="stylesheet" href="home.css"/>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />        <link rel="stylesheet" href="styles/mainStyle.css"/>
+        <link rel="stylesheet" href="styles/home.css"/>
         <script src="scripts/time.js" defer="true"></script>
         <script src="scripts/home.js" defer="true"></script>
     </head>
@@ -27,13 +27,13 @@
     <body>
         <nav>
             <div>
-                <a class="logo" href="home.php">Riddler</a>
+                <img class="logo" src="img/LogoBeige.png">
             </div>
 
             <div class="navbuttons">
                 <a class="other" href="indovinelli.php">Indovinelli</a>
                 <div id="navbuttons" > 
-                    <a class="button">Profilo</a>
+                    <a class="button" href="profilo.php">Profilo</a>
                 </div>
             </div>
         </nav>

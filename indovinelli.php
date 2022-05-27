@@ -18,8 +18,8 @@
 
         <title>Riddler - Home</title>
 
-        <link rel="stylesheet" href="mainStyle.css"/>
-        <link rel="stylesheet" href="indovinelli.css"/>
+        <link rel="stylesheet" href="styles/mainStyle.css"/>
+        <link rel="stylesheet" href="styles/indovinelli.css"/>
         <script src="scripts/time.js" defer="true"></script>
         <script src="scripts/indovinelli.js" defer="true"></script>
     </head>
@@ -27,13 +27,13 @@
     <body>
         <nav>
             <div>
-                <a class="logo" href="home.php">Riddler</a>
+                <img class="logo" src="img/LogoBeige.png">
             </div>
 
             <div class="navbuttons">
                 <a class="other" href="home.php">Home</a>
                 <div id="navbuttons" > 
-                    <a class="button">Profilo</a>
+                    <a class="button" href="profilo.php">Profilo</a>
                 </div>
             </div>
         </nav>
@@ -50,9 +50,9 @@
             </div>
         </section>
 
-        <section class="modal-view hidden">
-            <div id="modal-content">
-                <button id="closeNewIndovinello">
+        <section id="modalIndovinelli" class="modal hidden">
+            <div class="modal-content">
+                <button class="closeModale">
                     <span>X</span>
                 </button>
 

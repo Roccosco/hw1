@@ -14,10 +14,12 @@
                 VALUES ('".$_SESSION["username"]."', ".$commento.", (select now()))";
             $result = mysqli_query($conn, $SQL);
             if($result){
-                $SQL = "SELECT Sorrisi FROM Commenti where ID=".$commento;
+                $SQL = "SELECT I.Sorrisi as SorrisiIndovinello, C.Sorrisi as SorrisiCommento FROM Commenti C, Indovinelli I where C.Indovinello=I.ID AND C.ID=".$commento;
                 $result = mysqli_query($conn, $SQL);
+                $row = mysqli_fetch_assoc($result);
                 echo json_encode(array(
-                    "sorrisi"=> mysqli_fetch_assoc($result)["Sorrisi"], 
+                    "sorrisiIndovinello" => $row["SorrisiIndovinello"],
+                    "sorrisiCommento" => $row["SorrisiCommento"], 
                     "errore" => false
                 ));
             }

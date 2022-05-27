@@ -1,14 +1,12 @@
 TODO:
 	Aggiungere le notifiche per i commenti in un tuo indovinello
-	Sistemare le icone degli utenti (farle da giphy)
-	Cambiare i font, mettere le immagini
+		Cambiare i font
 	Nel profilo devono spuntare i tuoi post
-	Mobile view
+		Mobile view
 	Mettere nella home ricerca per hot topic o novità
-	Creare veri indovinelli
-	Footer
-	Se modifico il n. di sorrisi e di commenti devo modificare le info dell'indovinello
-	Ordinare i commenti per sorrisi e data e salvare il min sorriso e data per fetch
+		Creare veri indovinelli
+		Footer
+		Ordinare i commenti e i post per sorrisi e data e salvare il min sorriso e data per fetch
+		Se sbaglio la password e poi la riscrivo l'errore nella confermapassword non si toglie. Sia signup che modficaPassword
 
-	Chiudere tutte le connessioni
-	Sistemare login.js
+		Chiudere tutte le connessioni

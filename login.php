@@ -43,8 +43,8 @@
 
         <title>Riddler - Login</title>
 
-        <link rel="stylesheet" href="mainStyle.css"/>
-        <link rel="stylesheet" href="loginSignup.css"/>
+        <link rel="stylesheet" href="styles/mainStyle.css"/>
+        <link rel="stylesheet" href="styles/loginSignup.css"/>
         <script src="scripts/login.js" defer="true"></script>
     </head>
     <body>
@@ -60,11 +60,13 @@
                 </div>
                 <div class="formContent spaziati">
                     <label>Password: </label>
-                    <input id="password" type="text" name="password" <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
+                    <input id="password" type="password" name="password" <?php if(isset($_POST["password"])){echo "value=".$_POST["password"];} ?>>
                 </div>
 
-                <div class = 'serverError'>
-                    <?php if(isset($errore)){ echo "Username o Password errati! "; } ?>
+                <div <?php if(isset($errore)) echo "class='error'"; ?> >
+                    <div class = 'divError centered'>
+                        Username o Password errati!
+                    </div>
                 </div>
 
                 <div class="formContent">

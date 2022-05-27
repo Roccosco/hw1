@@ -27,6 +27,7 @@
 
         if($sesso!="M" && $sesso!="F")
             $errore=true;
+            
         if (strlen($password) < 8 || !preg_match('/^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$/', $password))
             $errore = true;
         if (strcmp($password, $confirm))
@@ -56,8 +57,8 @@
         }
 
         if(!$errore) {
-            $SQL = "INSERT INTO Utenti (Username, PasswordHash, Email, Nome, DataNascita, Sesso) 
-            VALUES ('".$username."','".$passwordhash."','".$email."','".$nome."','".$dataNascita."','".$sesso."')";
+            $SQL = "INSERT INTO Utenti (Username, PasswordHash, Email, Nome, DataNascita, Sesso, GifProfilo) 
+            VALUES ('".$username."','".$passwordhash."','".$email."','".$nome."','".$dataNascita."','".$sesso."', NULL)";
             $result = mysqli_query($conn, $SQL);
             if($result) {
                 $_SESSION["username"] = $username;
@@ -81,8 +82,8 @@
 
         <title>Riddler - Registrati</title>
 
-        <link rel="stylesheet" href="mainStyle.css"/>
-        <link rel="stylesheet" href="loginSignup.css"/>
+        <link rel="stylesheet" href="styles/mainStyle.css"/>
+        <link rel="stylesheet" href="styles/loginSignup.css"/>
         <script src="scripts/signup.js" defer="true"></script>
     </head>
     <body>

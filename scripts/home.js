@@ -43,9 +43,30 @@ function createIndovinello(indovinello){
     divIndovinelloDettagli.classList.add('indovinelloDettagli');
     indovinelloContainer.appendChild(divIndovinelloDettagli);
 
-    const span = document.createElement('span');
-    span.innerText = getStringTimeAgo(indovinello.Data) + " - Sorrisi: " + indovinello.Sorrisi + " - Commenti: " + indovinello.NCommenti;
-    divIndovinelloDettagli.appendChild(span);
+    const divDettagli = document.createElement('div');
+    divIndovinelloDettagli.appendChild(divDettagli);
+
+    const spanTime = document.createElement('span');
+    spanTime.innerText = getStringTimeAgo(indovinello.Data);
+    divDettagli.appendChild(spanTime);
+
+    const spanSorrisiIcon = document.createElement('span');
+    spanSorrisiIcon.classList.add('material-symbols-outlined');
+    spanSorrisiIcon.innerText="sentiment_satisfied";
+    divDettagli.appendChild(spanSorrisiIcon);
+    const spanSorrisi = document.createElement('span');
+    spanSorrisi.classList.add("nSorrisi");
+    spanSorrisi.innerText = indovinello.Sorrisi;
+    divDettagli.appendChild(spanSorrisi);
+
+    const spanCommentiIcon = document.createElement('span');
+    spanCommentiIcon.classList.add('material-symbols-outlined');
+    spanCommentiIcon.innerText="chat";
+    divDettagli.appendChild(spanCommentiIcon);
+    const spanCommenti = document.createElement('span');
+    spanCommenti.classList.add("nCommenti");
+    spanCommenti.innerText = indovinello.NCommenti;
+    divDettagli.appendChild(spanCommenti);
 
     const divAuthor = document.createElement('div');
     divAuthor.classList.add('indovinelloAuthor');
@@ -53,7 +74,10 @@ function createIndovinello(indovinello){
 
     const imgAuthor = document.createElement('img');
     imgAuthor.classList.add('indovinelloImage');
-    imgAuthor.src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+    if(indovinello.GifProfilo === null)
+        imgAuthor.src="img/profilo.png";
+    else
+        imgAuthor.src=indovinello.GifProfilo;
     divAuthor.appendChild(imgAuthor);
 
     const pAuthor = document.createElement('p');
@@ -128,6 +152,9 @@ function addCommento(event){
         indovinelli[indovinelloID].commentiID.push(json.ID);
 
         testoCommento.value="";
+
+        const nCommenti =  target.closest('.indovinelloContainer').querySelector('.nCommenti');
+        nCommenti.innerText= parseInt(nCommenti.innerText) + 1;
     });
 }
 
@@ -170,7 +197,10 @@ function createCommento(commentiContainer, commento){
 
     const imgAuthor = document.createElement('img');
     imgAuthor.classList.add('commentoImage');
-    imgAuthor.src="https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+    if(commento.GifProfilo === null)
+        imgAuthor.src="img/profilo.png";
+    else
+        imgAuthor.src=commento.GifProfilo;
     commentoDiv.appendChild(imgAuthor);
 
     const commentoInfo = document.createElement('div');
@@ -235,7 +265,9 @@ function addSorriso(event){
             img.removeEventListener("click", addSorriso);
             img.addEventListener('click', deleteSorriso);
 
-            img.parentNode.querySelector('.nlike').innerText=json.sorrisi;
+            img.parentNode.querySelector('.nlike').innerText=json.sorrisiCommento;
+
+            img.closest('.indovinelloContainer').querySelector('.nSorrisi').innerText=json.sorrisiIndovinello;
         }
     });
 }
@@ -258,7 +290,8 @@ function deleteSorriso(event){
             img.removeEventListener("click", deleteSorriso);
             img.addEventListener('click', addSorriso);
 
-            img.parentNode.querySelector('.nlike').innerText=json.sorrisi;
+            img.parentNode.querySelector('.nlike').innerText=json.sorrisiCommento;
+            img.closest('.indovinelloContainer').querySelector('.nSorrisi').innerText=json.sorrisiIndovinello;
         }
     });
 }

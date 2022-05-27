@@ -14,15 +14,21 @@
             $SQL = "INSERT INTO Commenti (ID, Utente, Indovinello, Testo, Data, Sorrisi) 
                 VALUES (NULL,'".$_SESSION["username"]."',".$indovinello.", '".$testo."', (select now()), 0)";
             $result = mysqli_query($conn, $SQL);
-            if($result)
-                echo json_encode(array(
-                    'ID' => mysqli_insert_id($conn)."",
-                    'Utente' => $_SESSION["username"],
-                    'Indovinello' => $indovinello,
-                    'Testo' => $_POST['testo'],
-                    'Data' => date('Y-m-d H:i:s'),
-                    'Sorrisi' => 0
-                ));
+            if($result){
+                $id = mysqli_insert_id($conn)."";
+                $SQL = "SELECT GifProfilo from Utenti where Username='".$_SESSION["username"]."'";
+                $result = mysqli_query($conn, $SQL);
+                if($row =mysqli_fetch_assoc($result)) 
+                    echo json_encode(array(
+                        'ID' => $id,
+                        'Utente' => $_SESSION["username"],
+                        'GifProfilo' => $row['GifProfilo'],
+                        'Indovinello' => $indovinello,
+                        'Testo' => $_POST['testo'],
+                        'Data' => date('Y-m-d H:i:s'),
+                        'Sorrisi' => 0
+                    ));
+            }
             else
                 die("Errore: qualcosa è andato storto!");
         }

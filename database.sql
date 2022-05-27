@@ -8,7 +8,8 @@ create table Utenti(
     Nome varchar(64) NOT NULL,
     PasswordHash varchar(255),
     DataNascita date,
-    Sesso char
+    Sesso char,
+    GifProfilo varchar(255)
 ) engine=INNODB;
 
 create table Indovinelli(
