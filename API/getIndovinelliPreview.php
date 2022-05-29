@@ -13,4 +13,7 @@
         $output[] = $row;
 
     echo json_encode($output);
+
+    mysqli_free_result($result);
+    mysqli_close($conn);
 ?>

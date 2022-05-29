@@ -9,8 +9,8 @@
     $page=$_GET['page'];
     $offset = $page*20;
 
-    $url = "https://api.giphy.com/v1/gifs/search?q=".$searchContent."&limit=20&offset=".$offset."&api_key=".$apikey;
-
+    $url = "https://api.giphy.com/v1/gifs/search?q=".urlencode($searchContent)."&limit=20&offset=".$offset."&api_key=".$apikey;
+    
     $curl=curl_init();
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);

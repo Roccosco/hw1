@@ -161,3 +161,7 @@ section{
 .hidden{
     display: none;
 }
+
+#newPost{
+    margin: 20px;
+}

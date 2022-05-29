@@ -23,6 +23,8 @@
             if(password_verify($password, $row['PasswordHash'])) {
                 $_SESSION["username"] = $username;
                 header("Location: home.php");
+
+                mysqli_close($conn);
                 exit;
             }
             else{
@@ -32,6 +34,8 @@
         else{
             $errore = true;
         }
+
+        mysqli_close($conn);
     }
 ?>
 
@@ -42,6 +46,10 @@
         <meta name="viewport"content="width=device-width, initial-scale=1">
 
         <title>Riddler - Login</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="styles/mainStyle.css"/>
         <link rel="stylesheet" href="styles/loginSignup.css"/>

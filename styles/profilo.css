@@ -12,7 +12,7 @@ header{
     justify-content: space-around;
 }
 
-.containerImage:hover, button:hover, .caricaAltro:hover{
+.containerImage:hover, button:hover, .caricaAltro:hover, .gifGiphy:hover{
     cursor: pointer;
 }
 
@@ -172,7 +172,7 @@ img.okcheck{
     top: 150px;
     color: black;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 19px;
     text-align: center;
 }
 

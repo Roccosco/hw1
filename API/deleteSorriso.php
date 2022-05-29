@@ -22,11 +22,15 @@
                     "sorrisiCommento" => $row["SorrisiCommento"], 
                     "errore" => false
                 ));
+                mysqli_free_result($result);
             }
             else
                 echo json_encode(array(
                     "errore" => true
                 ));
+
+            
+            mysqli_close($conn);
         }
         else
             echo json_encode(array(

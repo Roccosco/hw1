@@ -33,6 +33,8 @@
                     }
                 }
             }
+            
+            mysqli_close($conn);
         }
     }
     echo 0;

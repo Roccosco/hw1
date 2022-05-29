@@ -15,5 +15,8 @@
         else{
             echo 1;
         }
+
+        mysqli_free_result($result);
+        mysqli_close($conn);
     }
 ?>

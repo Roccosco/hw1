@@ -28,9 +28,15 @@
                         'Data' => date('Y-m-d H:i:s'),
                         'Sorrisi' => 0
                     ));
+                mysqli_free_result($result);
             }
-            else
+            else{
+                mysqli_close($conn);
+
                 die("Errore: qualcosa è andato storto!");
+            }
+            
+            mysqli_close($conn);
         }
         else
             die("Errore: mancano informazioni necessarie");

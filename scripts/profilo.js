@@ -95,9 +95,12 @@ function gifConfirmed(event){
 }
 
 function searchGif(){
-    page=0;
-    query = document.querySelector('#textGiphy').value;
-    fetchGiphy(query,0);
+    const q = document.querySelector('#textGiphy').value;
+    if(q.length>0){
+        page=0;
+        query = q;
+        fetchGiphy(query,0);
+    }
 }
 
 function showModaleGiphy(){

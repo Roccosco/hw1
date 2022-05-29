@@ -18,17 +18,23 @@
         }
         else if(isset($_GET['utente'])){
             $utente = mysqli_real_escape_string($conn, $_GET['utente']);
-            if(isset($_GET['minSorrisi'])){
+            if(isset($_GET['minSorrisi']) && isset($_GET['maxTimeStamp'])){
                 $minSorrisi = mysqli_real_escape_string($conn, $_GET['minSorrisi']);
-                $SQL = $SQL."I.Utente = '". $utente ."' AND I.Stato='ACCETTATO' AND I.Sorrisi<".$minSorrisi." order by I.Sorrisi DESC LIMIT 10";
+                $maxTimeStamp = mysqli_real_escape_string($conn, $_GET['maxTimeStamp']);
+                $maxDate = date('Y-m-d H:i:s', $maxTimeStamp);
+
+                $SQL = $SQL."I.Utente = '". $utente ."' AND I.Stato='ACCETTATO' AND (I.Sorrisi<".$minSorrisi." OR (I.Sorrisi=".$minSorrisi." AND I.Data>'".$maxDate."')) order by I.Sorrisi DESC, I.Data LIMIT 10";
             }
             else
             $SQL = $SQL."I.Utente = '". $utente ."' AND I.Stato='ACCETTATO' order by I.Sorrisi DESC LIMIT 10";
         }
         else
-            if(isset($_GET['minSorrisi'])){
+            if(isset($_GET['minSorrisi']) && isset($_GET['maxTimeStamp'])){
                 $minSorrisi = mysqli_real_escape_string($conn, $_GET['minSorrisi']);
-                $SQL = $SQL."I.Utente not like '". $_SESSION["username"] ."' AND I.Stato='ACCETTATO' AND I.Sorrisi<".$minSorrisi." order by I.Sorrisi DESC LIMIT 10";
+                $maxTimeStamp = mysqli_real_escape_string($conn, $_GET['maxTimeStamp']);
+                $maxDate = date('Y-m-d H:i:s', $maxTimeStamp);
+
+                $SQL = $SQL."I.Utente not like '". $_SESSION["username"] ."' AND I.Stato='ACCETTATO' AND (I.Sorrisi<".$minSorrisi." OR (I.Sorrisi=".$minSorrisi." AND I.Data>'".$maxDate."')) order by I.Sorrisi DESC LIMIT 10";
             }
             else
                 $SQL = $SQL."I.Utente not like '". $_SESSION["username"] ."' AND I.Stato='ACCETTATO' order by I.Sorrisi DESC LIMIT 10";
@@ -39,6 +45,9 @@
             $output[] = $row;
 
         echo json_encode($output);
+
+        mysqli_free_result($result);
+        mysqli_close($conn);
     }
     
 ?>

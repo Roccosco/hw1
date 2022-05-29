@@ -27,6 +27,9 @@
                 echo json_encode(array(
                     "errore" => true
                 ));
+
+            mysqli_free_result($result);
+            mysqli_close($conn);
         }
         else
             echo json_encode(array(

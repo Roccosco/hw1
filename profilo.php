@@ -17,6 +17,9 @@
     $result = mysqli_query($conn, $SQL);
     if(mysqli_num_rows($result) > 0)
         $row = mysqli_fetch_assoc($result);
+
+    mysqli_free_result($result);
+    mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -27,12 +30,17 @@
 
         <title>Riddler - Home</title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="styles/mainStyle.css"/>
         <link rel="stylesheet" href="styles/profilo.css"/>
         <script src="scripts/profilo.js" defer="true"></script>
     </head>
 
     <body>
+        <main>
         <nav>
             <div>
                 <img class="logo" src="img/LogoBeige.png">
@@ -127,6 +135,14 @@
                 </button>
             </div>
         </section>
+        </main>
+
+        <footer>
+            <div>
+                <p>Riddler</p>
+                <p>	Rocco Mattia Di Mauro - <?php echo date("Y"); ?></p>
+            </div>
+        </footer>
     </body>
 </html>
 

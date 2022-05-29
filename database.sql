@@ -93,11 +93,11 @@ begin
 end //
 delimiter ;
 
-delimiter //
-create trigger addNotificaCommento
-after insert on Commenti
-for each row
-begin
-    TODO;
-end //
-delimiter ;
+-- delimiter //
+-- create trigger addNotificaCommento
+-- after insert on Commenti
+-- for each row
+-- begin
+--     TODO;
+-- end //
+-- delimiter ;

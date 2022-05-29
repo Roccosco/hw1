@@ -15,8 +15,9 @@
             else
                 $soluzione="";
 
+            //lo stato dovrebbe essere ATTESA e poi un admin dovrebbe confermare l'indovinello
             $SQL = "INSERT INTO Indovinelli (ID, Utente, Titolo, Descrizione, Soluzione, Data, Stato) 
-                VALUES (NULL,'".$_SESSION["username"]."','".$titolo."', '".$descrizione."','".$soluzione."', (select now()), 'ATTESA')";
+                VALUES (NULL,'".$_SESSION["username"]."','".$titolo."', '".$descrizione."','".$soluzione."', (select now()), 'ACCETTATO')";
             $result = mysqli_query($conn, $SQL);
             if($result)
                 echo json_encode(array(
@@ -26,12 +27,17 @@
                     'Descrizione' => $_POST['descrizione'],
                     'Soluzione' => $soluzione,
                     'Data' => date('Y-m-d H:i:s'),
-                    'Stato' => "ATTESA",
+                    'Stato' => "ACCETTATO",
                     'Sorrisi' => 0,
                     'NCommenti' => 0
                 )); 
-            else
+            else{
+                mysqli_close($conn);
+                
                 die("Errore: qualcosa è andato storto!");
+            }
+
+            mysqli_close($conn);
         }
         else
             die("Errore: manca la descrizione");

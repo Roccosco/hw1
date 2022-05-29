@@ -16,6 +16,8 @@
                 echo 1;
                 exit;
             }
+
+            mysqli_close($conn);
         }
     }
     echo 0;

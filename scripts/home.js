@@ -1,9 +1,10 @@
 let indovinelli = {};
 let indovinelliID = [];
 let minSorrisiIndovinello = null;
+let maxTimeStamp = null;
 
 function fetchIndovinelli(){
-    minSorrisi = minSorrisiIndovinello===null ? "" : "&minSorrisi=" + minSorrisiIndovinello;
+    minSorrisi = minSorrisiIndovinello===null ? "" : "&minSorrisi=" + minSorrisiIndovinello + "&maxTimeStamp=" + maxTimeStamp;
     fetch("API/getIndovinelli.php?"+minSorrisi).then((risposta) => 
     {
         if(risposta.ok)
@@ -16,11 +17,19 @@ function fetchIndovinelli(){
                 indovinelli[indovinello.ID] = {};
                 indovinelli[indovinello.ID].commentiID = [];
                 indovinelli[indovinello.ID].minSorrisi = null;
+                indovinelli[indovinello.ID].maximeStamp = null;
 
                 createIndovinello(indovinello);
                 indovinelliID.push(indovinello.ID);
-                if(indovinello.Sorrisi < minSorrisiIndovinello || minSorrisiIndovinello===null)
+                if( minSorrisiIndovinello===null || indovinello.Sorrisi < minSorrisiIndovinello){
                     minSorrisiIndovinello=indovinello.Sorrisi;
+                    maxTimeStamp = toTimeStamp(indovinello.Data);
+                }
+                else if(indovinello.Sorrisi == minSorrisiIndovinello)
+                    if(maxTimeStamp === null || toTimeStamp(indovinello.Data) > maxTimeStamp){
+                        maxTimeStamp = toTimeStamp(indovinello.Data);
+                    }
+
             }
     });
 }
@@ -163,7 +172,7 @@ function mostraCommenti(event){
     const target = event.currentTarget;
     const indovinelloID = target.dataset.indovinelloID;
 
-    minSorrisi = indovinelli[indovinelloID].minSorrisi===null ? "" : "&minSorrisi=" + indovinelli[indovinelloID].minSorrisi;
+    minSorrisi = indovinelli[indovinelloID].minSorrisi===null ? "" : "&minSorrisi=" + indovinelli[indovinelloID].minSorrisi + "&maxTimeStamp=" + indovinelli[indovinelloID].maxTimeStamp;
     fetch("API/getCommenti.php?indovinello="+ indovinelloID + minSorrisi).then((risposta) => 
     {
         if(risposta.ok)
@@ -178,8 +187,15 @@ function mostraCommenti(event){
                 createCommento(target.parentNode.querySelector('.commentiContainer'), commento);
                 indovinelli[indovinelloID].commentiID.push(commento.ID);
 
-                if(commento.Sorrisi < indovinelli[indovinelloID].minSorrisi || indovinelli[indovinelloID].minSorrisi===null)
-                    indovinelli[indovinelloID].minSorrisi=commento.Sorrisi;
+                if(indovinelli[indovinelloID].minSorrisi===null || commento.Sorrisi < indovinelli[indovinelloID].minSorrisi){
+                    indovinelli[indovinelloID].minSorrisi = commento.Sorrisi;
+                    indovinelli[indovinelloID].maxTimeStamp = toTimeStamp(commento.Data);
+                }
+                else if(commento.Sorrisi == indovinelli[indovinelloID].minSorrisi)
+                    if(indovinelli[indovinelloID].maxTimeStamp === null || toTimeStamp(commento.Data) > indovinelli[indovinelloID].maxTimeStamp){
+                        indovinelli[indovinelloID].maxTimeStamp = toTimeStamp(commento.Data);
+                    }
+
             }
         }
     });
@@ -300,6 +316,11 @@ function checkCommento(commento){
     if(commento.length>0)
         return true;
     return false;
+}
+
+function toTimeStamp(dateString){
+    let date = Date.parse(dateString);
+    return date/1000;
 }
 
 fetchIndovinelli();

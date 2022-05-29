@@ -18,6 +18,10 @@
 
         <title>Riddler - Home</title>
 
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
         <link rel="stylesheet" href="styles/mainStyle.css"/>
         <link rel="stylesheet" href="styles/indovinelli.css"/>
         <script src="scripts/time.js" defer="true"></script>
@@ -25,6 +29,7 @@
     </head>
 
     <body>
+        <main>
         <nav>
             <div>
                 <img class="logo" src="img/LogoBeige.png">
@@ -67,6 +72,14 @@
                 </button>
             </div>
         </section>
+        </main>
+
+        <footer>
+            <div>
+                <p>Riddler</p>
+                <p>	Rocco Mattia Di Mauro - <?php echo date("Y"); ?></p>
+            </div>
+        </footer>
     </body>
 </html>
 
